@@ -169,6 +169,8 @@ class Raid extends Controller {
 				data.tth = moment.preciseDiff(Date.now(), data.end * 1000, true)
 				data.gif = pokemonGif(Number(data.pokemon_id))
 				data.distime = moment(data.end * 1000).tz(geoTz(data.latitude, data.longitude).toString()).format(this.config.locale.time)
+        data.starttime = moment(data.start * 1000).tz(geoTz(data.latitude, data.longitude).toString()).format(this.config.locale.time)
+        data.spawntime = moment(data.spawn * 1000).tz(geoTz(data.latitude, data.longitude).toString()).format(this.config.locale.time)
 				if (!data.team_id) data.team_id = 0
 				if (!data.evolution) data.evolution = 0
 				if (data.name) data.gymName = data.name ? data.name : ''
@@ -239,6 +241,8 @@ class Raid extends Controller {
 						id: data.pokemon_id,
 						baseStats: monster.stats,
 						time: data.distime,
+            start: data.starttime,
+            spawn: data.spawntime,
 						tthh: data.tth.hours,
 						tthm: data.tth.minutes,
 						tths: data.tth.seconds,
